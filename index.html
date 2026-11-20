@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Música Desde Cero - Ukelele, Piano y Flauta</title>
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-hover: #4338ca;
+            --bg: #f8fafc;
+            --card: #ffffff;
+            --text: #1e293b;
+            --text-light: #64748b;
+            --accent: #f59e0b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            color: white;
+            text-align: center;
+            padding: 3rem 1.5rem;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        /* Navegación por pestañas */
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: var(--card);
+            border: 2px solid #e2e8f0;
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: var(--text);
+        }
+
+        .tab-btn:hover {
+            border-color: var(--primary);
+        }
+
+        .tab-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+        }
+
+        /* Contenido de instrumentos */
+        .instrument-section {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .instrument-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card {
+            background: var(--card);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2rem;
+        }
+
+        .card h2 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        .zero-guide {
+            background: #eff6ff;
+            border-left: 4px solid var(--primary);
+            padding: 1.2rem;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 1.5rem;
+        }
+
+        .zero-guide h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .tutorial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .tutorial-item {
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.2s;
+        }
+
+        .tutorial-item:hover {
+            transform: translateY(-3px);
+            border-color: var(--primary);
+        }
+
+        .tutorial-number {
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: var(--primary);
+            text-transform: uppercase;
+        }
+
+        .tutorial-title {
+            font-weight: 600;
+            margin: 0.4rem 0 0.8rem;
+        }
+
+        .tutorial-link {
+            display: inline-block;
+            text-decoration: none;
+            background: #f1f5f9;
+            color: var(--text);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-align: center;
+            transition: background 0.2s;
+        }
+
+        .tutorial-link:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Sección de la "Foto" del Profesor */
+        .teacher-section {
+            background: linear-gradient(to right, #1e293b, #334155);
+            color: white;
+            border-radius: 16px;
+            padding: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .teacher-photo {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background: #4f46e5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 4px solid var(--accent);
+            flex-shrink: 0;
+            margin: 0 auto;
+            overflow: hidden;
+            
+        }
+
+        .teacher-info {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .teacher-info h3 {
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+            font-size: 1.4rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>🎵 Aprende Música Desde Cero</h1>
+    <p>Sin partituras, sin solfeo y sin conocimientos previos. Elige tu instrumento y empieza a tocar hoy mismo.</p>
+</header>
+
+<div class="container">
+    <!-- Pestañas -->
+    <div class="tabs">
+        <button class="tab-btn active" onclick="openTab('ukelele')">🎸 Ukelele</button>
+        <button class="tab-btn" onclick="openTab('piano')">🎹 Piano / Teclado</button>
+        <button class="tab-btn" onclick="openTab('flauta')">🎶 Flauta Dulce</button>
+    </div>
+
+    <!-- SECCIÓN UKELELE -->
+    <section id="ukelele" class="instrument-section active">
+        <div class="card">
+            <h2>Ukelele para principiantes absolutos</h2>
+            <div class="zero-guide">
+                <h3>💡 Lo único que necesitas saber antes de empezar (0% Solfeo):</h3>
+                <ul>
+                    <li><strong>Las cuerdas se cuentan de abajo hacia arriba:</strong> La 1ª es la de más abajo (la más aguda) y la 4ª es la de más arriba.</li>
+                    <li><strong>Los trastes:</strong> Son los espacios rectangulares del mástil. Se cuentan desde el clavijero hacia el cuerpo (Traste 1, 2, 3...).</li>
+                    <li><strong>Cómo leer acordes:</strong> Solo necesitas mirar dibujos (diagramas) que te dicen exactamente qué dedo poner en qué cuerda y traste.</li>
+                </ul>
+            </div>
+
+            <h3>📚 10 Tutoriales paso a paso sin solfeo</h3>
+            <div class="tutorial-grid">
+                <div class="tutorial-item"><span class="tutorial-number">Paso 1</span><div class="tutorial-title">Cómo afinar tu ukelele desde cero con el móvil</div><a href="https://www.youtube.com/results?search_query=como+afinar+ukelele+principiantes" target="_blank" class="tutorial-link">Ver tutorial ▶</a></div>
+                <div class="tutorial-item"><span class="tutorial-number">Paso 2</span><div class="tutorial-title">Postura correcta y cómo sujetar el ukelele</div><a href="https://www.youtube.com/results?search_query=como+sujetar+el+ukelele+principiantes" target="_blank" class="tutorial-link">Ver tutorial ▶</a></div>
+                <div class="tutorial-item"><span class="tutorial-number">Paso 3</span><div class="tutorial-title">Tus primeros 4 acordes mágicos (C, G, Am, F)</div><a href="https://www.youtube.com/results?search_query=primeros+4+acordes+ukelele+C+G+Am+F" target="_blank" class="tutorial-link">Ver tutorial ▶</a></div>
+                <div class="tutorial-item"><span class="tutorial-number">Paso 4</span><div class="tutorial-title">El rasgueo básico (Abajo, Abajo, Arriba, Arriba...)</div><a href="https://www.youtube.com/results?search_query=rasgueo+basico+ukelele+principiantes" target="_blank" class="tutorial-link">Ver tutorial ▶</a></div>
+                <div class="tutorial-item"><span class="tutorial-number">Paso 5</span><div class="tutorial-title">Cómo cambiar de acorde rápido sin perder el ritmo</div><a href="https://www.youtube.com/results?search_query=como+cambiar+de+acordes+rapido+ukelele" target="_blank" class="tutorial-link">Ver tutorial ▶</a></div>
+                <div class="tutorial-item"><span class="tutorial-number">Paso 6</span><div class="tutorial-title">Tu primera canción completa con solo 2 acordes</div><a href="https://www.youtube.com/results?search_query=canciones+ukelele+2+acordes+faciles" target="_blank" class="tutorial-link">Ver tutorial ▶</a></div>
+                <div class="tutorial-item"><span class="tutorial-number">Paso 7</span><div class="tutorial-title">Cómo leer tablaturas (números en lugar de notas)</div><a href="https://www.youtube.com/results?search_query=como+leer+tablaturas+ukelele+facil" target="_blank" class="tutorial-link">Ver tutorial ▶</a></div>
+                <div class="tutorial-item"><span class="tutorial-number">Paso 8</span><div class="tutorial-title">Punteo fácil: Cumpleaños Feliz cuerda por cuerda</div><a href="https://www.youtube.com/results?search_query=cumpleanos+feliz+ukelele+punteo+facil" target="_blank" class="tutorial-link">Ver tutorial ▶</a></div>
+                <div class="tutorial-item"><span class="tutorial-number">Paso 9</span><div class="tutorial-title">Introducción al arpegio con 3 dedos</div><a href="https://www.youtube.com/results?search_query=arpegios+faciles+ukelele+principiantes" target="_blank" class="tutorial-link">Ver tutorial ▶</a></div>
+                <div class="tutorial-item"><span class="tutorial-number">Paso 10</span><div class="tutorial-title">5 canciones pop famosas con los 4 acordes básicos</div><a href="https://www.youtube.com/results?search_query=canciones+famosas+ukelele+4+acordes+facil" target="_blank" class="tutorial-link">Ver tutorial ▶</a></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN PIANO -->
+    <section id="piano" class="instrument-section">
+        <div class="card">
+            <h2>Piano / Teclado desde cero absoluto</h2>
+            <div class="zero-guide">
+                <h3>💡 Lo único que necesitas saber antes de empezar (0% Solfeo):</h3>
+                <ul>
+                    <li><strong>Encuentra el DO sin leer nada:</strong> Mira las teclas negras. Verás que van en grupos de 2 y de 3. La tecla blanca justo a la izquierda de cualquier grupo de 2 teclas negras es siempre <strong>DO</strong>.</li>
+                    <li><strong>Orden de teclas blancas:</strong> A partir de ese DO, hacia la derecha van en orden: Do, Re, Mi, Fa, Sol, La, Si... y vuelve a empezar.</li>
+                    <li><strong>Numeración de dedos:</strong> En ambos brazos, tus pulgares son el dedo 1 y los meñiques el dedo 5.</li>
+                </ul>
+            </div>
+
+            <h3>📚 10 Tutoriales paso a paso sin solfeo</h3>
+            <div class="tutorial-grid">
+                <div class="tutorial-item"><span class="tutorial-number">Paso 1</span><div class="tutorial-title">Orientación en el teclado y postura de las manos</div><a href="https://www.youtube.com/results?search_query=piano+desde+cero+postura+y+notas+sin+solfeo" target="_blank" class="tutorial-link">Ver tutorial ▶</a></div>
+                <div class="tutorial-item"><span class="tutorial-number">Paso 2</span><div class="tutorial-title">Ejercicio de independencia de los 5 dedos</div><a href="https://www.youtube.com/results?search_query=ejercicios+5+dedos+piano+principiantes" target="_blank" class="tutorial-link">Ver tutorial ▶</a></div>
+                <div class="tutorial-item"><span class="tutorial-number">Paso 3</span><div class="tutorial-title">Cómo formar acordes mayores contando teclas (Fórmula 4-3)</div><a href="https://www.youtube.com/results?search_query=como+formar+acordes+piano+sin+solfeo" target="_blank" class="tutorial-link">Ver tutorial ▶</a></div>
+                <div class="tutorial-item"><span class="tutorial-number">Paso 4</span><div class="tutorial-title">Cómo formar acordes menores (Fórmula 3-4)</div><a href="https://www.youtube.com/results?search_query=acordes+menores+piano+facil+principiantes" target="_blank" class="tutorial-link">Ver tutorial ▶</a></div>
+                <div class="tutorial-item"><span class="tutorial-number">Paso 5</span><div class="tutorial-title">Coordinar mano izquierda (bajos) y mano derecha (acordes)</div><a href="https://www.youtube.com/results?search_query=coordinar+ambas+manos+piano+principiantes" target="_blank" class="tutorial-link">Ver tutorial ▶</a></div>
+                <div class="tutorial-item"><span class="tutorial-number">Paso 6</span><div class="tutorial-title">Tu primera melodía: Himno de la Alegría (solo teclas blancas)</div><a href="https://www.youtube.com/results?search_query=himno+de+la+alegria+piano+facil+tutorial" target="_blank" class="tutorial-link">Ver tutorial ▶</a></div>
+                <div class="tutorial-item"><span class="tutorial-number">Paso 7</span><div class="tutorial-title">El patrón de acompañamiento pop con 4 acordes</div><a href="https://www.youtube.com/results?search_query=acompanamiento+pop+piano+4+acordes+facil" target="_blank" class="tutorial-link">Ver tutorial ▶</a></div>
+                <div class="tutorial-item"><span class="tutorial-number">Paso 8</span><div class="tutorial-title">Cómo usar el pedal de sustain sin que suene borroso</div><a href="https://www.youtube.com/results?search_query=como+usar+pedal+sustain+piano+principiantes" target="_blank" class="tutorial-link">Ver tutorial ▶</a></div>
+                <div class="tutorial-item"><span class="tutorial-number">Paso 9</span><div class="tutorial-title">Aprende "Let It Be" con acordes visuales</div><a href="https://www.youtube.com/results?search_query=let+it+be+piano+tutorial+facil+acordes" target="_blank" class="tutorial-link">Ver tutorial ▶</a></div>
+                <div class="tutorial-item"><span class="tutorial-number">Paso 10</span><div class="tutorial-title">Arpegios básicos para que tus canciones suenen profesionales</div><a href="https://www.youtube.com/results?search_query=arpegios+faciles+piano+principiantes" target="_blank" class="tutorial-link">Ver tutorial ▶</a></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN FLAUTA -->
+    <section id="flauta" class="instrument-section">
+        <div class="card">
+            <h2>Flauta Dulce desde cero absoluto</h2>
+            <div class="zero-guide">
+                <h3>💡 Lo único que necesitas saber antes de empezar (0% Solfeo):</h3>
+                <ul>
+                    <li><strong>La regla de las manos:</strong> La mano <strong>IZQUIERDA</strong> siempre va arriba (tapando el agujero de atrás y los 3 primeros de adelante). La derecha va abajo.</li>
+                    <li><strong>Sopla suave:</strong> Nunca soples como si inflaras un globo; di suavemente la sílaba <em>"tu"</em> o <em>"du"</em> para que no pite.</li>
+                    <li><strong>Tapar bien los agujeros:</strong> Usa la yema del dedo (la parte plana), no la punta. Si queda una rendija de aire, sonará un chillido.</li>
+                </ul>
+            </div>
+
+            <h3>📚 10 Tutoriales paso a paso sin solfeo</h3>
+            <div class="tutorial-grid">
+                <div class="tutorial-item"><span class="tutorial-number">Paso 1</span><div class="tutorial-title">Cómo soplar y articular ("Tu") para evitar pitidos</div><a href="https://www.youtube.com/results?search_query=como+tocar+flauta+dulce+sin+que+pite" target="_blank" class="tutorial-link">Ver tutorial ▶</a></div>
+                <div class="tutorial-item"><span class="tutorial-number">Paso 2</span><div class="tutorial-title">Tus primeras 3 notas: SI, LA y SOL (solo mano izquierda)</div><a href="https://www.youtube.com/results?search_query=notas+si+la+sol+flauta+dulce+principiantes" target="_blank" class="tutorial-link">Ver tutorial ▶</a></div>
+                <div class="tutorial-item"><span class="tutorial-number">Paso 3</span><div class="tutorial-title">Primera canción con 3 notas: "Mary Had a Little Lamb"</div><a href="https://www.youtube.com/results?search_query=canciones+flauta+dulce+notas+si+la+sol" target="_blank" class="tutorial-link">Ver tutorial ▶</a></div>
+                <div class="tutorial-item"><span class="tutorial-number">Paso 4</span><div class="tutorial-title">Notas agudas fáciles: DO agudo y RE agudo</div><a href="https://www.youtube.com/results?search_query=nota+do+y+re+agudo+flauta+dulce" target="_blank" class="tutorial-link">Ver tutorial ▶</a></div>
+                <div class="tutorial-item"><span class="tutorial-number">Paso 5</span><div class="tutorial-title">Incorporando la mano derecha: Notas FA y MI</div><a href="https://www.youtube.com/results?search_query=notas+fa+y+mi+flauta+dulce+principiantes" target="_blank" class="tutorial-link">Ver tutorial ▶</a></div>
+                <div class="tutorial-item"><span class="tutorial-number">Paso 6</span><div class="tutorial-title">Las notas graves difíciles: RE grave y DO grave</div><a href="https://www.youtube.com/results?search_query=como+tocar+do+grave+flauta+dulce+facil" target="_blank" class="tutorial-link">Ver tutorial ▶</a></div>
+                <div class="tutorial-item"><span class="tutorial-number">Paso 7</span><div class="tutorial-title">Tutorial Titanic (My Heart Will Go On) con notas escritas</div><a href="https://www.youtube.com/results?search_query=titanic+flauta+dulce+tutorial+con+notas" target="_blank" class="tutorial-link">Ver tutorial ▶</a></div>
+                <div class="tutorial-item"><span class="tutorial-number">Paso 8</span><div class="tutorial-title">Tutorial Piratas del Caribe (versión lenta y fácil)</div><a href="https://www.youtube.com/results?search_query=piratas+del+caribe+flauta+dulce+facil+notas" target="_blank" class="tutorial-link">Ver tutorial ▶</a></div>
+                <div class="tutorial-item"><span class="tutorial-number">Paso 9</span><div class="tutorial-title">Cómo hacer notas agudas usando medio agujero trasero</div><a href="https://www.youtube.com/results?search_query=notas+agudas+flauta+dulce+agujero+trasero" target="_blank" class="tutorial-link">Ver tutorial ▶</a></div>
+                <div class="tutorial-item"><span class="tutorial-number">Paso 10</span><div class="tutorial-title">Limpieza y cuidado básico de tu flauta dulce</div><a href="https://www.youtube.com/results?search_query=como+limpiar+flauta+dulce" target="_blank" class="tutorial-link">Ver tutorial ▶</a></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOTO DEL PROFE (TÚ TOCANDO EL UKELELE) -->
+    <div class="teacher-section">
+        <div class="teacher-photo" title="Yo tocando el ukelele">
+            <!-- Si quieres poner una foto real tuya, borra el <svg> de abajo y descomenta esta línea: -->
+            <img src="yo.jpg" alt="Yo tocando el ukelele" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+        <div class="teacher-info">
+            <h3>🎸 ¡Aquí me tenéis dándolo todo con el ukelele!</h3>
+            <p>Empecé exactamente igual que tú, sin tener ni idea de leer una partitura ni saber qué era un acorde. Hoy ya me defiendo con el ukelele y he montado esta web para demostrarte que cualquiera puede empezar desde cero. ¡Coge tu instrumento y dale caña!</p>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>Creado para aprender música sin barreras • 100% libre de solfeo</p>
+</footer>
+
+<script>
+    function openTab(instrumentId) {
+        // Ocultar todas las secciones
+        const sections = document.querySelectorAll('.instrument-section');
+        sections.forEach(sec => sec.classList.remove('active'));
+
+        // Desactivar todos los botones
+        const buttons = document.querySelectorAll('.tab-btn');
+        buttons.forEach(btn => btn.classList.remove('active'));
+
+        // Mostrar la sección elegida y activar su botón
+        document.getElementById(instrumentId).classList.add('active');
+        event.currentTarget.classList.add('active');
+    }
+</script>
+
+</body>
+</html>
